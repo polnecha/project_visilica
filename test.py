@@ -80,3 +80,32 @@ def display_game():
     print('Текущее слово: ' + ' '.join(guessed_word))
     print(f'Оставшиеся попытки: {attempts_left}')
     print(f'Использованные буквы: {", ".join(sorted(guessed_letters))}')
+
+def play_game():
+    global attempts_left
+
+    while attempts_left > 0:
+        display_game()  # Показываем текущее состояние игры
+
+        guess = input('Введите букву: ').lower()
+
+        # Проверка на корректность ввода
+        if not guess.isalpha() or len(guess) != 1:
+            print("Введите только одну букву.")
+            continue
+
+        if guess in guessed_letters:
+            print("Эта буква уже была введена.")
+            continue
+
+        guessed_letters.add(guess)
+
+        # Если буква есть в слове, обновляем guessed_word
+        if guess in word_to_guess:
+            for i in range(len(word_to_guess)):
+                if word_to_guess[i] == guess:
+                    guessed_word[i] = guess
+            print("Угадали букву!")
+        else:
+            attempts_left -= 1
+            print(f"Ошибка! Буквы {guess} нет в слове.")
