@@ -73,3 +73,10 @@ hangman_images = [
       / \\  |
     ========='''  # 0 попыток, проигрыш
 ]
+
+# Функция для отображения состояния игры
+def display_game():
+    print(hangman_images[max_attempts - attempts_left])  # Показываем картинку в зависимости от оставшихся попыток
+    print('Текущее слово: ' + ' '.join(guessed_word))
+    print(f'Оставшиеся попытки: {attempts_left}')
+    print(f'Использованные буквы: {", ".join(sorted(guessed_letters))}')
